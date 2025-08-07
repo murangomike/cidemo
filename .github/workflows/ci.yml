@@ -57,9 +57,11 @@ jobs:
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );"
         
-        # Run tests (for now just check app starts)
-        timeout 10s npm start || true
-        echo "Basic smoke test passed"
+        # Run Jest tests
+        npm test
+        
+        # Generate test coverage
+        npm run test:coverage
 
     - name: Upload test results
       uses: actions/upload-artifact@v4
