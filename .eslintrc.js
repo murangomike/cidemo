@@ -40,6 +40,17 @@ module.exports = {
     'no-process-exit': 'error',
     'no-path-concat': 'error'
   },
+  overrides: [
+    {
+      // Allow console and process.exit in scripts
+      files: ['scripts/**/*.js'],
+      rules: {
+        'no-console': 'off',
+        'no-process-exit': 'off',
+        'require-await': 'off'
+      }
+    }
+  ],
   ignorePatterns: [
     'node_modules/',
     'dist/',

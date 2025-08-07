@@ -37,7 +37,7 @@ try {
   httpClient = parsedUrl.protocol === 'https:' ? https : http;
 } catch (error) {
   console.error('❌ Invalid URL:', targetUrl);
-  process.exit(1);
+  throw new Error(`Invalid URL: ${targetUrl}`);
 }
 
 // Test statistics
@@ -92,10 +92,9 @@ function makeRequest() {
     };
 
     const req = httpClient.request(options, (res) => {
-      let data = '';
-      
       res.on('data', (chunk) => {
-        data += chunk;
+        // We don't need to store response data for load testing
+        chunk.toString();
       });
       
       res.on('end', () => {
@@ -179,13 +178,13 @@ function displayResults() {
   const avgResponseTime = stats.totalRequests > 0 ? stats.totalResponseTime / stats.totalRequests : 0;
   const successRate = stats.totalRequests > 0 ? (stats.successfulRequests / stats.totalRequests) * 100 : 0;
   
-  console.log(`📋 Test Configuration:`);
+  console.log('📋 Test Configuration:');
   console.log(`   Target URL: ${targetUrl}`);
   console.log(`   Concurrent Requests: ${concurrentRequests}`);
   console.log(`   Test Duration: ${testDuration}s (actual: ${duration.toFixed(2)}s)`);
   console.log();
   
-  console.log(`📈 Performance Metrics:`);
+  console.log('📈 Performance Metrics:');
   console.log(`   Total Requests: ${stats.totalRequests}`);
   console.log(`   Requests/Second: ${rps.toFixed(2)}`);
   console.log(`   Success Rate: ${successRate.toFixed(2)}%`);
@@ -193,14 +192,14 @@ function displayResults() {
   console.log(`   Failed Requests: ${stats.failedRequests}`);
   console.log();
   
-  console.log(`⏱️  Response Times:`);
+  console.log('⏱️  Response Times:');
   console.log(`   Average: ${avgResponseTime.toFixed(2)}ms`);
   console.log(`   Minimum: ${stats.minResponseTime === Infinity ? 'N/A' : stats.minResponseTime.toFixed(2) + 'ms'}`);
   console.log(`   Maximum: ${stats.maxResponseTime.toFixed(2)}ms`);
   console.log();
   
   if (Object.keys(stats.responseCodes).length > 0) {
-    console.log(`📊 Response Codes:`);
+    console.log('📊 Response Codes:');
     Object.entries(stats.responseCodes)
       .sort(([a], [b]) => parseInt(a) - parseInt(b))
       .forEach(([code, count]) => {
@@ -211,7 +210,7 @@ function displayResults() {
   }
   
   if (Object.keys(stats.errors).length > 0) {
-    console.log(`❌ Errors:`);
+    console.log('❌ Errors:');
     Object.entries(stats.errors).forEach(([error, count]) => {
       const percentage = (count / stats.totalRequests) * 100;
       console.log(`   ${error}: ${count} (${percentage.toFixed(1)}%)`);
@@ -219,10 +218,10 @@ function displayResults() {
     console.log();
   }
   
-  console.log(`💡 Tips for Kubernetes Auto-scaling:`);
-  console.log(`   - Monitor with: kubectl get hpa -n crud-app -w`);
-  console.log(`   - Check pods: kubectl get pods -n crud-app -w`);
-  console.log(`   - View metrics: kubectl top pods -n crud-app`);
+  console.log('💡 Tips for Kubernetes Auto-scaling:');
+  console.log('   - Monitor with: kubectl get hpa -n crud-app -w');
+  console.log('   - Check pods: kubectl get pods -n crud-app -w');
+  console.log('   - View metrics: kubectl top pods -n crud-app');
 }
 
 /**
