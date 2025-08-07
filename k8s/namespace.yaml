@@ -1,0 +1,44 @@
+---
+# Namespace for our application
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: crud-app
+  labels:
+    name: crud-app
+
+---
+# ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: backend-service-account
+  namespace: crud-app
+
+---
+# Role for backend service
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: crud-app
+  name: backend-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+
+---
+# RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: backend-role-binding
+  namespace: crud-app
+subjects:
+- kind: ServiceAccount
+  name: backend-service-account
+  namespace: crud-app
+roleRef:
+  kind: Role
+  name: backend-role
+  apiGroup: rbac.authorization.k8s.io

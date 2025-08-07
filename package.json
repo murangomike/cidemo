@@ -1,0 +1,16 @@
+{
+  "name": "crud-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo 'Add tests here'",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  }
+}
