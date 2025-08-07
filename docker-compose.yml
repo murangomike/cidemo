@@ -22,6 +22,7 @@ services:
   # Node.js Backend Application
   backend:
     build: .
+    image: murango001/ciddemo:latest
     container_name: crud_backend
     environment:
       DATABASE_URL: postgresql://postgres:password123@db:5432/crudapp

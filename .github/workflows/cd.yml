@@ -19,8 +19,8 @@ on:
         default: 'latest'
 
 env:
-  DOCKER_REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  DOCKER_REGISTRY: docker.io
+  IMAGE_NAME: murango001/ciddemo
   KUBE_NAMESPACE: crud-app
 
 jobs:

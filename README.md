@@ -21,8 +21,10 @@ A simple Node.js backend application with PostgreSQL database, containerized wit
 ### Prerequisites
 
 - Docker and Docker Compose installed
+- kubectl installed (for Kubernetes deployment)
+- minikube or other Kubernetes cluster (optional)
 
-### Running the Application
+### Running the Application Locally
 
 1. **Start the application:**
    ```bash

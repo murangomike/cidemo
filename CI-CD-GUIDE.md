@@ -139,8 +139,10 @@ To fully activate the pipeline, you'll need to configure these GitHub Secrets:
 ### Required Secrets
 
 ```bash
-# Container Registry (automatically configured for GitHub)
-GITHUB_TOKEN  # Automatically provided
+# Docker Hub Registry
+DOCKERHUB_USERNAME    # Your Docker Hub username (murango001)
+DOCKERHUB_TOKEN       # Your Docker Hub access token
+GITHUB_TOKEN          # Automatically provided by GitHub
 
 # Optional: Cloud Provider (AWS example)
 AWS_ACCESS_KEY_ID      # Your AWS access key

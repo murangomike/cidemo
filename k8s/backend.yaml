@@ -30,8 +30,8 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend-backend:latest  # Using the image we built with docker-compose
-        imagePullPolicy: Never  # Use local image
+        image: murango001/ciddemo:latest  # Using Docker Hub image
+        imagePullPolicy: Always  # Always pull latest image
         ports:
         - containerPort: 3000
         envFrom:
