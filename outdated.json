@@ -1,0 +1,12 @@
+{
+  "express": {
+    "wanted": "4.21.2",
+    "latest": "5.1.0",
+    "dependent": "cidemo"
+  },
+  "pg": {
+    "wanted": "8.16.3",
+    "latest": "8.16.3",
+    "dependent": "cidemo"
+  }
+}
